@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Permissions for step counter, internet, etc. -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Permissions for external storage (for Android 9 and below, and Android 10 Scoped Storage) -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- Removed WRITE_EXTERNAL_STORAGE for Android 10 and above, use MediaStore/FileProvider instead -->
+    <!-- <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> -->
+
+    <!-- Required for Scoped Storage on Android 10 and above -->
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="FitnessApp"
+        android:theme="@style/Theme.AppCompat.Light">
+
+        <!-- Main Activity with intent filter for launching -->
+        <activity
+            android:name="com.example.fitnessapp.MainActivity"
+            android:exported="true"
+            android:label="Fitness App"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Other Activities -->
+        <activity android:name="com.example.fitnessapp.DietPlanActivity" />
+        <activity android:name="com.example.fitnessapp.WorkoutPlanActivity" />
+        <activity android:name="com.example.fitnessapp.StepCounterActivity" />
+        <activity android:name="com.example.fitnessapp.MuscleActivationActivity" />
+        <activity android:name="com.example.fitnessapp.SleepTrackingActivity">
+            <!-- Add other configurations here as needed -->
+        </activity>
+
+
+        <!-- FileProvider for sharing files between apps (if necessary) -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+</manifest>
